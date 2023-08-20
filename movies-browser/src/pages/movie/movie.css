@@ -1,0 +1,9 @@
+.movie_detail_card{
+    display: flex;
+    padding: 10px;
+    height: 300px;
+}
+.movie_detail {
+    padding: 0;
+    margin-left: 10px;
+}

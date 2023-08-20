@@ -1,0 +1,5 @@
+.movies{
+    display: flex;
+    /* border: 1px solid red; */
+    flex-wrap: wrap;
+}
