@@ -1,5 +1,17 @@
 .movies{
     display: flex;
-    /* border: 1px solid red; */
     flex-wrap: wrap;
+}
+
+.search_wrapper{
+    border: 1px solid silver;
+    width: 50%;
+    margin:10px;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 512px){
+    .search_wrapper{
+        width: 90%;
+    }
 }

@@ -8,15 +8,18 @@ import axios from "axios"
 
 const API_KEY = import.meta.env.VITE_MOVIES_APP_API_KEY
 
-export const fetchMovies = createAsyncThunk("movies/fetchMovies", (page) => {
-  return axios
-    .get(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&page=${page}`,
-    )
-    .then((response) => {
-      return response.data
-    })
-})
+export const fetchMovies = createAsyncThunk(
+  "movies/fetchMovies",
+  (page?: number) => {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&page=${page}`,
+      )
+      .then((response) => {
+        return response.data
+      })
+  },
+)
 
 interface SerializedError {
   name?: string

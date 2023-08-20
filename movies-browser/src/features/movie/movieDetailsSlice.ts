@@ -1,5 +1,3 @@
-// https://api.themoviedb.org/3/movie/{movie_id}
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 
@@ -7,7 +5,7 @@ const API_KEY = import.meta.env.VITE_MOVIES_APP_API_KEY
 
 export const fetchMovieDetails = createAsyncThunk(
   "movie/fetchMovieDetails",
-  (movie_id) => {
+  (movie_id: number) => {
     return axios
       .get(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}`)
       .then((response) => response.data)
@@ -21,8 +19,18 @@ interface SerializedError {
   stack?: string
 }
 
+type movieTypes = {
+  cast?: any
+  overview?: string
+  runtime?: number
+  release_date?: string
+  title?: string
+  vote_average?: number
+  poster_path?: string
+}
+
 interface MovieDetails {
-  movieDetails: {}
+  movieDetails: movieTypes
   loading: "idle" | "pending" | "succeeded" | "failed"
   error: SerializedError
 }

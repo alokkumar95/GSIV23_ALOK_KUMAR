@@ -22,17 +22,18 @@ function Movie() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchCredits(+params?.id))
-    dispatch(fetchMovieDetails(+params.id))
+    dispatch(fetchCredits(+(params?.id || "")))
+    dispatch(fetchMovieDetails(+(params?.id || "")))
   }, [])
 
   useEffect(() => {
-    movieCredits?.credits?.crew?.filter(({ name, job }) => {
-      if (job === "Director") {
-        console.log("name---", name)
-        setDirector(name)
-      }
-    })
+    movieCredits?.credits?.crew?.filter(
+      ({ name, job }: { name: string; job: string }) => {
+        if (job === "Director") {
+          setDirector(name)
+        }
+      },
+    )
   }, [movieCredits])
 
   function getMovieLength(minutes: number) {
@@ -56,7 +57,7 @@ function Movie() {
             </h3>
             <p>
               {movieDetails.movieDetails.release_date?.slice(0, 4)} |
-              {" " + getMovieLength(movieDetails.movieDetails?.runtime)} |
+              {" " + getMovieLength(movieDetails.movieDetails?.runtime || 0)} |
               {" " + director}
             </p>
             <p>

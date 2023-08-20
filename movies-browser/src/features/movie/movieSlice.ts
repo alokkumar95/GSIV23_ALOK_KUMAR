@@ -3,11 +3,16 @@ import axios from "axios"
 
 const API_KEY = import.meta.env.VITE_MOVIES_APP_API_KEY
 
-export const fetchCredits = createAsyncThunk("movie/fetchCredits", (id) => {
-  return axios
-    .get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`)
-    .then((response) => response.data)
-})
+export const fetchCredits = createAsyncThunk(
+  "movie/fetchCredits",
+  (id?: number) => {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`,
+      )
+      .then((response) => response.data)
+  },
+)
 
 interface SerializedError {
   name?: string
@@ -17,7 +22,7 @@ interface SerializedError {
 }
 
 interface MovieCredits {
-  credits: {}
+  credits: { cast?: any; crew?: any }
   loading: "idle" | "pending" | "succeeded" | "failed"
   error: SerializedError
 }

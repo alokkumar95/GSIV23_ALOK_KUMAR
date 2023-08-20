@@ -6,7 +6,7 @@ import { fetchSearchMovies } from "../../features/moviesList/searchMoviesSlice"
 import MovieCard from "../../components/MovieCard"
 import "./moviesList.css"
 import { useNavigate } from "react-router-dom"
-import { IconButton, InputBase } from "@mui/material"
+import { IconButton, InputBase, CircularProgress } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 
 const API_KEY = import.meta.env.VITE_MOVIES_APP_API_KEY
@@ -53,7 +53,7 @@ function MoviesList() {
         )
         setMoviesList(searchMovies)
       } else {
-        dispatch(fetchMovies(1))
+        dispatch(fetchMovies(page))
         setMoviesList(movies)
       }
     }, 500)
@@ -63,14 +63,7 @@ function MoviesList() {
 
   return (
     <div>
-      <div
-        style={{
-          border: "1px solid silver",
-          width: "50%",
-          margin: "10px",
-          borderRadius: "10px",
-        }}
-      >
+      <div className="search_wrapper">
         <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
           <SearchIcon />
         </IconButton>
@@ -113,7 +106,7 @@ function MoviesList() {
           ))}
         </div>
       ) : (
-        ""
+        <CircularProgress />
       )}
       <Pagination
         count={
